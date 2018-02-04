@@ -51,11 +51,15 @@ sub stage
         exit( 0 );
     }
 
-    $io->unlink() if $io->exists();
+    if ( $io->exists() )
+    {
+        
+        $io->unlink();
+    }
 
-    $io->touch();
+    $io->assert();
 
-    return $io->absolute()->pathname;
+    return $io;
 }
 
 1;

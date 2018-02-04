@@ -28,12 +28,17 @@ sub execute
         ? $task->{ 'resource' }->{ $os }
         : $task->{ 'resource' }->{ 'other' };
 
+    if ( io( $resource )->exists() ) 
+    {
+        $resource = io( $resource )->absolute->pathname;
+    }
+
     if ( $task->{ 'directory' } )
     {
         $dir = io( $task->{ 'directory' } )->chdir;
     }
 
-    my @cmd = ( io( $resource )->absolute->pathname );
+    my @cmd = ( $resource );
 
     if ( $task->{ 'parameters' } )
     {

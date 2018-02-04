@@ -56,12 +56,12 @@ sub clear
         }
     }
 
-    if ( $io->name =~ /\./ )
-    {
-        return;
-    }
+    #if ( $io->name =~ /\.[a-z0-9]$/i )
+    #{
+    #    return $io->touch();
+    #}
 
-    return $io->mkdir();
+    #return $io->mkdir();
 
 }
 

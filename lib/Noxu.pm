@@ -4,13 +4,15 @@
 # @version:         v1.0
 # @author:          Crazy Camel
 ############################################################
-package Noxu::Assemble;
+package Noxu;
 
+use 5.026001;
 use utf8;
 use strict;
 use warnings;
 
 use Object::Tiny qw/script base/;
+
 use YAML::Tiny;
 use IO::All -utf8;
 
@@ -48,4 +50,45 @@ sub build
     return $self;
 }
 
+# Preloaded methods go here.
+
 1;
+__END__
+# Below is stub documentation for your module. You'd better edit it!
+
+=head1 NAME
+
+Noxu - Perl extension for a bare bones YAML build system
+
+=head1 SYNOPSIS
+
+  use Noxu;
+  
+  my $noxu = new Noxu;
+
+  my $filename = "build.yml" # filename of build file
+
+  $noxu->build( $filename );
+
+=head1 DESCRIPTION
+
+A simplistic bare bone YAML based build system
+
+=head2 EXPORT
+
+None by default.
+
+=head1 AUTHOR
+
+Xerocole, E<lt>development@crazycamel.caE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2018 by Crazy Camel
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.26.1 or,
+at your option, any later version of Perl 5 you may have available.
+
+
+=cut

@@ -16,38 +16,36 @@ use IO::All;
 plan tests => 2;
 
 {
-	my $noxu = Noxu->new();
+    my $noxu = Noxu->new();
 
-	# ----------------------------------
-	# Stage the files for testing
-	
- 	io( 'tmp.txt ')->touch();
+    # ----------------------------------
+    # Stage the files for testing
 
-	io( 'tmp' )->mkdir();
-	
-	io( 'tmp/test.txt' )->touch();
+    io( 'tmp.txt ' )->touch();
 
-	
-	# -----------------------------------
-	# Remove the file
-	my $removefile = [ [ { action => 'clean', resources => [ 'tmp.txt' ] } ] ];
-	
-	$noxu->parse( $removefile );
+    io( 'tmp' )->mkdir();
 
-	ok( !io('tmp.txt')->exists(), "Clean - removed file" );
+    io( 'tmp/test.txt' )->touch();
 
-	# ------------------------------------
-	# Remove the directory
-	my $removedirectory = [ [ { action => 'clean', resources => [ 'tmp' ] } ] ];
+    # -----------------------------------
+    # Remove the file
+    my $removefile = [ [ { action => 'clean', resources => [ 'tmp.txt' ] } ] ];
 
-	$noxu->parse( $removedirectory );
-	
-	ok( !io('tmp')->exists(), "Clean - removed directory");
+    $noxu->parse( $removefile );
 
+    ok( !io( 'tmp.txt' )->exists(), "Clean - removed file" );
 
-	## Clean up in case there was an error
-	
-	io('tmp')->rmtree() if io('tmp')->exists();
-	io( 'tmp.txt ')->unlink() if io( 'tmp.txt ')->exists();
+    # ------------------------------------
+    # Remove the directory
+    my $removedirectory = [ [ { action => 'clean', resources => [ 'tmp' ] } ] ];
+
+    $noxu->parse( $removedirectory );
+
+    ok( !io( 'tmp' )->exists(), "Clean - removed directory" );
+
+    ## Clean up in case there was an error
+
+    io( 'tmp' )->rmtree()      if io( 'tmp' )->exists();
+    io( 'tmp.txt ' )->unlink() if io( 'tmp.txt ' )->exists();
 
 }

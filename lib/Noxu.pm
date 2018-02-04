@@ -11,10 +11,11 @@ use utf8;
 use strict;
 use warnings;
 
-use Object::Tiny qw/script base/;
+use Object::Tiny;
 
 use YAML::Tiny;
 use IO::All -utf8;
+use Scalar::Util qw( blessed );
 
 use Noxu::Factory;
 
@@ -32,6 +33,8 @@ sub build
 
     my $targets = scalar @$build;
 
+    my $succeeded = 0;
+
     for ( my $idx = 0; $idx < $targets; $idx++ )
     {
         my $instructions = $build->[ $idx ];
@@ -40,26 +43,28 @@ sub build
         {
             my $action = ucfirst $task->{ 'action' };
 
-            $factory->instantiate( $action )->handle( $task );
+            $succeeded += ( blessed $factory->instantiate( $action )->handle( $task ) ne 'Noxu::Noop') ? 1 : 0;
 
         }
     }
 
     # ------------------------------------
 
-    return $self;
+    return $succeeded;
 }
 
 sub parse
 {
 
-    my ( $self, $build ) = @_;
+    my ( $self, $build ) =  @_ ;
 
     my $factory = Noxu::Factory->new();
     # ------------------------------------
 
     my $targets = scalar @$build;
 
+    my $succeeded = 0;
+
     for ( my $idx = 0; $idx < $targets; $idx++ )
     {
         my $instructions = $build->[ $idx ];
@@ -68,16 +73,13 @@ sub parse
         {
             my $action = ucfirst $task->{ 'action' };
 
-            $factory->instantiate( $action )->handle( $task );
-
+            $succeeded += ( blessed $factory->instantiate( $action )->handle( $task ) ne 'Noxu::Noop') ? 1 : 0;
         }
     }
 
     # ------------------------------------
 
-    return $self;
-
-
+    return $succeeded;
 
 }
 

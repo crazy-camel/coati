@@ -16,23 +16,23 @@ use IO::All;
 plan tests => 1;
 
 {
-	my $noxu = Noxu->new();
+    my $noxu = Noxu->new();
 
-	# ----------------------------------
-	# Stage the files for testing
-	# 
-	my $testfile = io( 'tmp.txt ');
-	
- 	$testfile->append( "Hello World");
-	
-	# -----------------------------------
-	# Remove the file
-	my $cfile = [ [ { action => 'clear', resources => [ 'tmp.txt' ] } ] ];
-	
-	$noxu->parse( $cfile );
-	
-	is( io( 'tmp.txt ')->size(), 0, "Clear a file test" );
+    # ----------------------------------
+    # Stage the files for testing
+    #
+    my $testfile = io( 'tmp.txt ' );
 
-	io( 'tmp.txt ')->unlink();
+    $testfile->append( "Hello World" );
+
+    # -----------------------------------
+    # Remove the file
+    my $cfile = [ [ { action => 'clear', resources => [ 'tmp.txt' ] } ] ];
+
+    $noxu->parse( $cfile );
+
+    is( io( 'tmp.txt ' )->size(), 0, "Clear a file test" );
+
+    io( 'tmp.txt ' )->unlink();
 
 }

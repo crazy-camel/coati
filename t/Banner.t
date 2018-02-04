@@ -15,32 +15,31 @@ use Noxu;
 plan tests => 3;
 
 {
-	my $noxu = Noxu->new();
+    my $noxu = Noxu->new();
 
-	my $title = [ [ { action => 'banner', title => 'abcdefghijklmnopqrstuvwxyz' } ] ];
-	is( counter( $noxu, $title ) , 192, "Banner - Title test" );
+    my $title = [ [ { action => 'banner', title => 'abcdefghijklmnopqrstuvwxyz' } ] ];
+    is( counter( $noxu, $title ), 192, "Banner - Title test" );
 
-	my $subtitle = [ [ { action => 'banner', title => 'abcdefghijklmnopqrstuvwxyz', subtitle => 'abcde' } ] ];
-	is( counter( $noxu, $subtitle ) , 201, "Banner - Sub title test" );
+    my $subtitle = [ [ { action => 'banner', title => 'abcdefghijklmnopqrstuvwxyz', subtitle => 'abcde' } ] ];
+    is( counter( $noxu, $subtitle ), 201, "Banner - Sub title test" );
 
-	my $message = [ [ { action => 'banner', message => 'abcdefghijklmnopqrstuvwxyz' } ] ];
-	is( counter( $noxu, $message ) , 192, "Banner - message test" );
+    my $message = [ [ { action => 'banner', message => 'abcdefghijklmnopqrstuvwxyz' } ] ];
+    is( counter( $noxu, $message ), 192, "Banner - message test" );
 
 }
-
 
 ####################################
 sub counter
 {
-	my ( $noxu, $build, $output ) = @_;
+    my ( $noxu, $build, $output ) = @_;
 
     local *STDOUT;
 
     open( STDOUT, ">>", \$output );
-        
+
     $noxu->parse( $build );
-        
+
     close( STDOUT );
-        
+
     return length $output;
 }

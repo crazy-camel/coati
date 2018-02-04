@@ -57,4 +57,12 @@ sub execute
     return $self;
 }
 
+
+sub cleanup
+{
+
+    # TODO: Clean up zombie'd threads for windows
+
+}
+
 1;

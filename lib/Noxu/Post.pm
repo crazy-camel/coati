@@ -27,6 +27,11 @@ sub execute
         $args{ $parm->{ 'name' } } = $parm->{ 'value' };
     }
 
+    if ( $task->{ 'type' } )
+    {
+        $form = $task->{ 'type' };
+    }
+
     if ( $task->{ 'resource' } )
     {
         $form = "form-data";
@@ -45,10 +50,8 @@ sub execute
 
     if ( $task->{ 'authentication' } )
     {
-        $request->authorization_basic(
-            $task->{ 'authentication' }->{ 'username' },
-            $task->{ 'authentication' }->{ 'password' }
-        );
+        $request->authorization_basic( $task->{ 'authentication' }->{ 'username' },
+            $task->{ 'authentication' }->{ 'password' } );
     }
 
     my $httpclient = $self->httpclient();

@@ -4,7 +4,6 @@ use Object::Tiny;
 use Module::Load qw( autoload );
 use Module::Load::Conditional qw( check_install );
 
-
 # ================================================== -->
 # instantiate
 # @description: the plugin factory method to load the plugin class
@@ -20,16 +19,28 @@ sub instantiate
 
     my $plugin = ( check_install( module => "Noxu::$type" ) ) ? "Noxu::$type" : "Noxu::Noop";
 
-    if ( defined $self->{ 'plugin_' . $type } )
+    my $key = 'plugin_' . lc $type;
+
+    if ( defined $self->{ $key } )
     {
-        return $self->{ 'plugin_' . $type };
+        return $self->{ $key };
     }
-   
+
     autoload $plugin;
 
-    $self->{ 'plugin_' . $type } = $plugin->new();
+    $self->{ $key } = $plugin->new();
 
-    return $self->{ 'plugin_' . $type };
+    return $self->{ $key };
+}
+
+sub DESTROY
+{
+    my ( $self ) = @_;
+    if ( defined->{ 'plugin_execute' } )
+    {
+        $self->{ $key }->cleanup();
+    }
+
 }
 
 1;

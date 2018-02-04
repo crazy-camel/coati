@@ -70,7 +70,7 @@ sub pause
 # ================================================== -->
 sub logger
 {
-    my ( $self, $id ,$message ) = @_;
+    my ( $self, $id, $message ) = @_;
 
     my $time = DateTime::Tiny->now();
 
@@ -85,7 +85,7 @@ sub logger
 
     $message =~ s/\R/ /g;    # lets remove new lines to keep things one line in the log;
 
-    io( 'noxu.log' )->append( "[$stamp] [$id] $message" );
+    io( 'noxu.log' )->append( "[$stamp] [$id] $message" )->append( "\n" . ( "-" x 78 ) . "\n" );
 
     return $self;
 }

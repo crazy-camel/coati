@@ -1,6 +1,6 @@
-package Noxu::Plugin::Isgone;
+package Noxu::Isgone;
 
-use base 'Noxu::Plugin::Base';
+use base 'Noxu::Base';
 
 # ================================================== -->
 # execute

@@ -1,6 +1,6 @@
-package Noxu::Plugin::Post;
+package Noxu::Post;
 
-use base 'Noxu::Plugin::Base';
+use base 'Noxu::Base';
 
 use HTTP::Request::Common;
 use IO::All -utf8;

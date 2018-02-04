@@ -1,4 +1,4 @@
-package Noxu::Plugin::Factory;
+package Noxu::Factory;
 
 use Object::Tiny;
 use Module::Load 'autoload';
@@ -22,7 +22,7 @@ sub instantiate
         return $self->{ 'plugin_' . $type };
     }
 
-    my $plugin = "Noxu::Plugin::$type";
+    my $plugin = "Noxu::$type";
 
     autoload $plugin;
 

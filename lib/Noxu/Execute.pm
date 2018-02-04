@@ -1,6 +1,6 @@
-package Noxu::Plugin::Execute;
+package Noxu::Execute;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 
 use IO::All -utf8;
 use IPC::Run3;

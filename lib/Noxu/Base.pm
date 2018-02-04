@@ -1,10 +1,10 @@
 ############################################################
-# @package:         Noxu::Plugin::Base
+# @package:         Noxu::Base
 # @description:     Base extended object for all plugins
 # @version:         v1.0
 # @author:          Crazy Camel
 ############################################################
-package Noxu::Plugin::Base;
+package Noxu::Base;
 
 use utf8;
 use strict;

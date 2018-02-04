@@ -1,13 +1,13 @@
-package Noxu::Plugin::Combine;
+package Noxu::Clear;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 use IO::All -utf8;
 
 # ================================================== -->
 # execute
 # @description: the plugin handler
 # @params:
-#  - @scalar: task
+#  - @scalar: task 
 # @returns:
 #  - reference to self for chaining
 # ================================================== -->
@@ -15,32 +15,29 @@ sub execute
 {
     my ( $self, $task ) = @_;
 
-    print "  [combine] $task->{name}...";
+    print "  [clear] clearing the following resources:\n";
 
-    my $filename = $self->stage( $task->{ 'name' } );
-
-    foreach my $prt ( @{ $task->{ 'sequence' } } )
+    foreach my $res ( @{ $task->{ 'resources' } } )
     {
-        my $binary = io( $prt )->binary->all;
+        print "   - $res\n";
 
-        $filename->binary->append( $binary );
+        $self->truncate( $res );
     }
-
-    print "  (OK)\n";
 
     return $self;
 }
 
 # ================================================== -->
-# stage
-# @description: ensures the resource is clear
+# truncate
+# @description: clear the contents of a file
 # @params:
-#  - @scalar: path - path to resource
+#  - @scalar: path  to resource 
 # @returns:
-#  - the absolute path to resource
+#  - reference to file
 # ================================================== -->
-sub stage
+sub truncate
 {
+
     my ( $self, $path ) = @_;
 
     my $io = io( $path );
@@ -53,9 +50,8 @@ sub stage
 
     $io->unlink() if $io->exists();
 
-    $io->touch();
+    return $io->touch();
 
-    return $io->absolute()->pathname;
 }
 
 1;

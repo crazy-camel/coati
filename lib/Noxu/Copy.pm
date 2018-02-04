@@ -1,6 +1,6 @@
-package Noxu::Plugin::Copy;
+package Noxu::Copy;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 
 use IO::All -utf8;
 use File::Basename;

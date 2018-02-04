@@ -1,6 +1,6 @@
-package Noxu::Plugin::Clean;
+package Noxu::Clean;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 use IO::All -utf8;
 
 # ================================================== -->
@@ -46,20 +46,19 @@ sub clear
     {
         if ( $io->is_dir() )
         {
-            $io->rmtree();
-            return $io->mkdir();
+            return $io->rmtree();
         }
 
         if ( $io->is_file() )
         {
-            $io->unlink();
-            return $io->touch();
+            return $io->unlink();
+            
         }
     }
 
     if ( $io->name =~ /\./ )
     {
-        return $io->touch();
+        return;
     }
 
     return $io->mkdir();

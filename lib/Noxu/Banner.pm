@@ -1,6 +1,6 @@
-package Noxu::Plugin::Banner;
+package Noxu::Banner;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 
 # ================================================== -->
 # banner
@@ -35,40 +35,5 @@ sub line
     return "   $message\n";
 }
 
-# ================================================== -->
-# test
-# @description: the plugin handler
-# @params:
-#  - @scalar: task
-# @returns:
-#  - reference to self for chaining
-# ================================================== -->
-
-sub test
-{
-    my ( $self ) = @_;
-
-    # ---------------------------------------------
-    my $counter = sub {
-        my ( $self, $task, $output ) = @_;
-
-        local *STDOUT;
-
-        open( STDOUT, ">>", \$output );
-        
-        $self->execute( $task );
-        
-        close( STDOUT );
-        
-        return length $output;
-    };
-
-    # ---------------------------------------------
-
-    my $task = { title => 'abcdefghijklmnopqrstuvwxyz1' };
-
-    return "Length is : " . $counter->( $self, $task );
-
-}
 
 1;

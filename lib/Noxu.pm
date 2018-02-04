@@ -1,5 +1,5 @@
 ############################################################
-# @package:         Noxu::Assemble
+# @package:         Noxu
 # @description:     A general purpose Builder
 # @version:         v1.0
 # @author:          Crazy Camel
@@ -16,13 +16,13 @@ use Object::Tiny qw/script base/;
 use YAML::Tiny;
 use IO::All -utf8;
 
-use Noxu::Plugin::Factory;
+use Noxu::Factory;
 
 sub build
 {
     my ( $self, $buildfile ) = @_;
 
-    my $factory = new Noxu::Plugin::Factory;
+    my $factory = Noxu::Factory->new();
 
     my $filename = io( $buildfile )->absolute->pathname;
 
@@ -48,6 +48,37 @@ sub build
     # ------------------------------------
 
     return $self;
+}
+
+sub parse
+{
+
+    my ( $self, $build ) = @_;
+
+    my $factory = Noxu::Factory->new();
+    # ------------------------------------
+
+    my $targets = scalar @$build;
+
+    for ( my $idx = 0; $idx < $targets; $idx++ )
+    {
+        my $instructions = $build->[ $idx ];
+
+        foreach my $task ( @$instructions )
+        {
+            my $action = ucfirst $task->{ 'action' };
+
+            $factory->instantiate( $action )->handle( $task );
+
+        }
+    }
+
+    # ------------------------------------
+
+    return $self;
+
+
+
 }
 
 # Preloaded methods go here.

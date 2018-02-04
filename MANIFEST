@@ -3,4 +3,7 @@ Makefile.PL
 MANIFEST
 README
 t/Noxu.t
+t/Banner.t
+t/Clean.t
+t/Clear.t
 lib/Noxu.pm

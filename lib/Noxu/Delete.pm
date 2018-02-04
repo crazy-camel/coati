@@ -1,6 +1,6 @@
-package Noxu::Plugin::Delete;
+package Noxu::Delete;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 
 use HTTP::Request::Common;
 

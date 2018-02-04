@@ -1,6 +1,6 @@
-package Noxu::Plugin::Waitfor;
+package Noxu::Waitfor;
 
-use parent 'Noxu::Plugin::Base';
+use parent 'Noxu::Base';
 
 # ================================================== -->
 # execute

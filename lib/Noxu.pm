@@ -6,7 +6,6 @@
 ############################################################
 package Noxu;
 
-use 5.026001;
 use utf8;
 use strict;
 use warnings;
